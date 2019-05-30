@@ -1,6 +1,7 @@
 locals {
   tier          = "${lookup(var.network_configuration, "tier", "")}"
   vpc           = "${lookup(var.network_configuration, "vpc", "")}"
+  subnets       = "${compact(split(" ", lookup(var.network_configuration, "subnets", "")))}"
   all_subnets   = "${distinct(concat(flatten(data.aws_subnet_ids.selected.*.ids), local.subnets))}"
 }
 
