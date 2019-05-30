@@ -96,3 +96,8 @@ variable "tags" {
   description = "Tags for redis nodes"
   default     = {}
 }
+
+variable "network_configuration" {
+  description = "A network configuration block"
+  default     = {}
+}
