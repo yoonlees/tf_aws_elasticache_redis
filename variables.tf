@@ -54,6 +54,7 @@ variable "redis_port" {
 
 variable "subnets" {
   type        = "list"
+  default     = []
   description = "List of VPC Subnet IDs for the cache subnet group"
 }
 
@@ -61,10 +62,6 @@ variable "subnets" {
 variable "redis_version" {
   description = "Redis version to use, defaults to 3.2.10"
   default     = "3.2.10"
-}
-
-variable "vpc_id" {
-  description = "VPC ID"
 }
 
 variable "redis_parameters" {

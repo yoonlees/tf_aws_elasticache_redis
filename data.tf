@@ -7,7 +7,7 @@ locals {
 
 ## Network data sources
 
-data "aws_vpc" "selected" {
+data "aws_vpc" "vpc" {
   count = "${local.tier != "" ? 1 : 0}"
 
   tags {
@@ -17,7 +17,7 @@ data "aws_vpc" "selected" {
 
 data "aws_subnet_ids" "selected" {
   count  = "${local.tier != "" ? 1 : 0}"
-  vpc_id = "${data.aws_vpc.selected.id}"
+  vpc_id = "${data.aws_vpc.vpc.id}"
 
   tags {
     Tier = "${local.tier}"

@@ -15,8 +15,10 @@ module "redis" {
   name           = "thtest"
   redis_clusters = "2"
   redis_failover = "true"
-  subnets        = "${module.vpc.database_subnets}"
-  vpc_id         = "${module.vpc.vpc_id}"
+  network_configuration {
+    vpc              = "techservicesastest2-vpc"
+    tier             = "public"
+  }
 }
 ```
 
@@ -63,9 +65,8 @@ module "redis" {
 | redis\_snapshot\_retention\_limit | The number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, then a snapshot that was taken today will be retained for 5 days before being deleted. If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off. Please note that setting a snapshot_retention_limit is not supported on cache.t1.micro or cache.t2.* cache nodes | string | `"0"` | no |
 | redis\_snapshot\_window | The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. The minimum snapshot window is a 60 minute period | string | `"06:30-07:30"` | no |
 | redis\_version | Redis version to use, defaults to 3.2.10 | string | `"3.2.10"` | no |
-| subnets | List of VPC Subnet IDs for the cache subnet group | list | n/a | yes |
+| subnets | List of VPC Subnet IDs for the cache subnet group | list | n/a | no |
 | tags | Tags for redis nodes | map | `{}` | no |
-| vpc\_id | VPC ID | string | n/a | yes |
 
 ## Outputs
 
