@@ -12,7 +12,6 @@ This module
 ```hcl
 module "redis" {
   source         = "github.com/terraform-community-modules/tf_aws_elasticache_redis?ref=v1.3.0"
-  env            = "${var.env}"
   name           = "thtest"
   redis_clusters = "2"
   redis_failover = "true"
@@ -54,7 +53,6 @@ module "redis" {
 | allowed\_cidr | A list of Security Group ID's to allow access to. | list | `[ "127.0.0.1/32" ]` | no |
 | allowed\_security\_groups | A list of Security Group ID's to allow access to. | list | `[]` | no |
 | apply\_immediately | Specifies whether any modifications are applied immediately, or during the next maintenance window. Default is false. | string | `"false"` | no |
-| env | env to deploy into, should typically dev/staging/prod | string | n/a | yes |
 | name | Name for the Redis replication group i.e. UserObject | string | n/a | yes |
 | redis\_clusters | Number of Redis cache clusters (nodes) to create | string | n/a | yes |
 | redis\_failover |  | string | `"false"` | no |

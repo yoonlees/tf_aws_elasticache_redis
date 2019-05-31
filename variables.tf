@@ -31,10 +31,6 @@ variable "allowed_security_groups" {
   description = "A list of Security Group ID's to allow access to."
 }
 
-variable "env" {
-  description = "env to deploy into, should typically dev/staging/prod"
-}
-
 variable "name" {
   description = "Name for the Redis replication group i.e. UserObject"
 }

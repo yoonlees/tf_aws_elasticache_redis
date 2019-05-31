@@ -7,8 +7,8 @@ resource "random_id" "salt" {
 }
 
 resource "aws_elasticache_replication_group" "redis" {
-  replication_group_id          = "${format("%.20s", "${var.name}-${var.env}")}"
-  replication_group_description = "Terraform-managed ElastiCache replication group for ${var.name}-${var.env}-${data.aws_vpc.vpc.tags["Name"]}"
+  replication_group_id          = "${format("%.20s", "${var.name}")}"
+  replication_group_description = "Terraform-managed ElastiCache replication group for ${var.name}-${data.aws_vpc.vpc.tags["Name"]}"
   number_cache_clusters         = "${var.redis_clusters}"
   node_type                     = "${var.redis_node_type}"
   automatic_failover_enabled    = "${var.redis_failover}"
@@ -25,9 +25,9 @@ resource "aws_elasticache_replication_group" "redis" {
 }
 
 resource "aws_elasticache_parameter_group" "redis_parameter_group" {
-  name = "${replace(format("%.255s", lower(replace("tf-redis-${var.name}-${var.env}-${data.aws_vpc.vpc.tags["Name"]}-${random_id.salt.hex}", "_", "-"))), "/\\s/", "-")}"
+  name = "${replace(format("%.255s", lower(replace("tf-redis-${var.name}-${data.aws_vpc.vpc.tags["Name"]}-${random_id.salt.hex}", "_", "-"))), "/\\s/", "-")}"
 
-  description = "Terraform-managed ElastiCache parameter group for ${var.name}-${var.env}-${data.aws_vpc.vpc.tags["Name"]}"
+  description = "Terraform-managed ElastiCache parameter group for ${var.name}-${data.aws_vpc.vpc.tags["Name"]}"
 
   # Strip the patch version from redis_version var
   family    = "redis${replace(var.redis_version, "/\\.[\\d]+$/", "")}"
@@ -39,6 +39,6 @@ resource "aws_elasticache_parameter_group" "redis_parameter_group" {
 }
 
 resource "aws_elasticache_subnet_group" "redis_subnet_group" {
-  name       = "${replace(format("%.255s", lower(replace("tf-redis-${var.name}-${var.env}-${data.aws_vpc.vpc.tags["Name"]}", "_", "-"))), "/\\s/", "-")}"
+  name       = "${replace(format("%.255s", lower(replace("tf-redis-${var.name}-${data.aws_vpc.vpc.tags["Name"]}", "_", "-"))), "/\\s/", "-")}"
   subnet_ids = ["${local.all_subnets}"]
 }
