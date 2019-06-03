@@ -19,6 +19,12 @@ variable "apply_immediately" {
   default     = "false"
 }
 
+variable "security_group_ids" {
+  type        = "list"
+  default     = []
+  description = "A list of cache security group names to associate with this replication group."
+}
+
 variable "name" {
   description = "Name for the Redis replication group i.e. UserObject"
 }
