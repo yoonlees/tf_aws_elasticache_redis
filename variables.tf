@@ -19,18 +19,6 @@ variable "apply_immediately" {
   default     = "false"
 }
 
-variable "allowed_cidr" {
-  type        = "list"
-  default     = []
-  description = "A list of Security Group ID's to allow access to."
-}
-
-variable "allowed_security_groups" {
-  type        = "list"
-  default     = []
-  description = "A list of Security Group ID's to allow access to."
-}
-
 variable "name" {
   description = "Name for the Redis replication group i.e. UserObject"
 }
