@@ -21,7 +21,7 @@ variable "apply_immediately" {
 
 variable "allowed_cidr" {
   type        = "list"
-  default     = ["127.0.0.1/32"]
+  default     = []
   description = "A list of Security Group ID's to allow access to."
 }
 
